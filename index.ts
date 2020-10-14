@@ -1,9 +1,9 @@
 const w : number = window.innerWidth 
 const h : number = window.innerHeight
-const parts : number = 5
-const scGap : number = 0.02 
+const parts : number = 7
+const scGap : number = 0.02 / parts
 const strokeFactor : number = 90 
-const sizeFactor : number = 5.9 
+const sizeFactor : number = 9.9 
 const delay : number = 20 
 const backColor : string = "#BDBDBD"
 const colors : Array<string> = [
@@ -50,6 +50,8 @@ class DrawingUtil {
         const sf2 : number = ScaleUtil.divideScale(sf, 1, parts)
         const sf3 : number = ScaleUtil.divideScale(sf, 2, parts)
         const sf4 : number = ScaleUtil.divideScale(sf, 3, parts)
+        const sf5 : number = ScaleUtil.divideScale(sf, 4, parts)
+        const sf6 : number = ScaleUtil.divideScale(sf, 5, parts)
         const size : number = Math.min(w, h) / sizeFactor 
         context.save()
         context.translate(w / 2, h / 2)
@@ -59,7 +61,7 @@ class DrawingUtil {
             DrawingUtil.drawLine(context, 0, 0, w * sf1, 0)
             context.restore()
         }
-        DrawingUtil.drawCircle(context, -w / 2 + w * sf4, 0, size * sf3)
+        DrawingUtil.drawCircle(context, -w / 2 + (w / 3 + size / 3) * (sf4 + sf5 + sf6), 0, size * sf3 * 0.5)
         context.restore()
     }
 
