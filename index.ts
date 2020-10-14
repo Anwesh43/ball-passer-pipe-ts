@@ -211,3 +211,25 @@ class BallPasserPipe {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    bpp : BallPasserPipe = new BallPasserPipe()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.bpp.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.bpp.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.bpp.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
